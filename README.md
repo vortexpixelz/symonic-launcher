@@ -27,6 +27,17 @@ Start here:
 src/podtics/README.md
 ```
 
+### Symonic Deck + SPLAT publishing rail
+
+The Deck prototype now has a typed MCORE-1 response surface plus the first SPLAT publishing toolchain: a ReportLab design-guide generator, Markdown report template, JSON Schema, example payload, validator, and an Actions artifact renderer.
+
+Start here:
+
+```txt
+apps/deck-api/README.md
+tools/README.md
+```
+
 ## File map
 
 ```txt
@@ -34,9 +45,16 @@ supabase/migrations/0001_podtic_core.sql
 supabase/migrations/0002_podtic_revision_functions.sql
 schemas/podtic-1.0.schema.json
 schemas/podtic-section-1.0.schema.json
+schemas/splat-report-0.1.schema.json
 src/podtics/queries.sql
 src/podtics/README.md
 scripts/seed-podtic-core.sql
+apps/deck-api/
+apps/deck-web/
+tools/create_symonic_design_guide.py
+tools/validate_splat_report.py
+templates/splat-report.md
+examples/splat-report.example.json
 ```
 
 ## First loop
