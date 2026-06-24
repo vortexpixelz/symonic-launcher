@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "symonic-deck-api"
+version = "0.1.0"
+description = "Typed MCORE-1 response gateway for the Symonic Deck."
+requires-python = ">=3.10"
+dependencies = [
+  "fastapi>=0.115",
+  "gradio>=5.0",
+  "mcore-py @ git+https://github.com/vortexpixelz/mcore-1.git@main",
+  "uvicorn[standard]>=0.30",
+]
+
+[project.optional-dependencies]
+dev = ["httpx>=0.27", "pytest>=8.0"]
+
+[tool.setuptools.packages.find]
+include = ["app*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
