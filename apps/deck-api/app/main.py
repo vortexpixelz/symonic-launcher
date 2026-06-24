@@ -41,8 +41,8 @@ class DeckSegment(BaseModel):
 class ValidatePatternRequest(BaseModel):
     pattern: str = Field(
         min_length=1,
-        examples=["012", "222"],
-        description="MCORE shorthand such as 012, -u-, or Unicode morae.",
+        examples=["01", "22"],
+        description="MCORE shorthand such as 01, -u-, or Unicode morae.",
     )
 
 
@@ -190,7 +190,7 @@ def _build_gradio_lab():
 
     with gr.Blocks(title="Symonic Deck Lab") as lab:
         gr.Markdown("# Symonic Deck Lab\nA rapid MCORE-1 response renderer.")
-        pattern = gr.Textbox(label="MCORE pattern", value="012")
+        pattern = gr.Textbox(label="MCORE pattern", value="01")
         output = gr.Markdown(label="Deck response")
         gr.Button("Run validation").click(run, inputs=pattern, outputs=output)
     return lab
