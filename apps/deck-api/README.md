@@ -20,6 +20,8 @@ TypeScript document surface  ──POST──>  FastAPI Deck adapter  ──dire
 
 The TypeScript application is the polished surface. Gradio is the fast research workbench, mounted by default at `/lab`; it makes the same underlying validation function easy to test and later portable to a Hugging Face Space.
 
+The publishing counterpart lives under `tools/`: the SPLAT design-guide generator, report template, JSON Schema, example report, validator, and a GitHub Actions renderer. Start with `tools/README.md`.
+
 ## Local run
 
 MCORE-1 is currently a private source dependency. From sibling clones of `symonic-launcher` and `mcore-1`:
