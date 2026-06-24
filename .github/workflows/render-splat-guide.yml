@@ -1,0 +1,59 @@
+name: Render SPLAT guide
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - "tools/create_symonic_design_guide.py"
+      - "tools/validate_splat_report.py"
+      - "tools/README.md"
+      - "templates/splat-report.md"
+      - "schemas/splat-report-0.1.schema.json"
+      - "examples/splat-report.example.json"
+      - ".github/workflows/render-splat-guide.yml"
+  push:
+    branches: [main]
+    paths:
+      - "tools/create_symonic_design_guide.py"
+      - "tools/validate_splat_report.py"
+      - "tools/README.md"
+      - "templates/splat-report.md"
+      - "schemas/splat-report-0.1.schema.json"
+      - "examples/splat-report.example.json"
+      - ".github/workflows/render-splat-guide.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install toolchain
+        run: python -m pip install --upgrade pip reportlab jsonschema
+
+      - name: Compile source tools
+        run: python -m py_compile tools/create_symonic_design_guide.py tools/validate_splat_report.py
+
+      - name: Validate report example
+        run: python tools/validate_splat_report.py examples/splat-report.example.json
+
+      - name: Render guide
+        run: |
+          python tools/create_symonic_design_guide.py \
+            --out dist/symonic_splat_design_guide_v0_2.pdf
+
+      - name: Upload guide artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: symonic-splat-design-guide
+          path: dist/symonic_splat_design_guide_v0_2.pdf
+          if-no-files-found: error

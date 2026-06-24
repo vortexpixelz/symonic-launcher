@@ -1,0 +1,98 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://symonic.com/schemas/splat-report-0.1.schema.json",
+  "title": "Symonic SPLAT Report",
+  "description": "Metadata contract for a traceable Signal, Proof, Limit, Action, Trace reporting artifact.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "artifact_id",
+    "artifact_type",
+    "title",
+    "handling",
+    "status",
+    "owner",
+    "version",
+    "created_at",
+    "updated_at",
+    "splat_mode",
+    "claim_tier",
+    "signal",
+    "proof",
+    "limit",
+    "action",
+    "trace"
+  ],
+  "properties": {
+    "artifact_id": {
+      "type": "string",
+      "pattern": "^SYM-(PUB|PRV|INT)-[A-Z0-9][A-Z0-9-]*$",
+      "description": "Stable, never-reused artifact identifier."
+    },
+    "artifact_type": { "const": "splat_report" },
+    "title": { "type": "string", "minLength": 3 },
+    "handling": { "enum": ["PUBLIC", "PRIVATE", "INTERNAL"] },
+    "status": { "enum": ["stage", "review-ready", "sent", "released", "retired"] },
+    "owner": { "type": "string", "minLength": 1 },
+    "version": { "type": "string", "pattern": "^v[0-9]+\\.[0-9]+(?:\\.[0-9]+)?$" },
+    "created_at": { "type": "string", "format": "date-time" },
+    "updated_at": { "type": "string", "format": "date-time" },
+    "splat_mode": {
+      "enum": ["horizon", "vanishing_point", "orthogonal", "transversal", "depth", "atmospheric", "value"]
+    },
+    "claim_tier": { "enum": ["established", "plausible", "conjectural", "ornamental"] },
+    "recipient": { "type": "string" },
+    "decision_horizon": { "type": "string" },
+    "receipt_manifest": { "type": "string", "minLength": 1 },
+    "next_action": { "type": "string", "minLength": 1 },
+    "signal": { "type": "string", "minLength": 1 },
+    "proof": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["statement", "receipt"],
+        "properties": {
+          "statement": { "type": "string", "minLength": 1 },
+          "receipt": { "type": "string", "minLength": 1 },
+          "method": { "type": "string" },
+          "verified": { "type": "boolean" }
+        }
+      }
+    },
+    "limit": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["known_limits", "not_established"],
+      "properties": {
+        "known_limits": { "type": "array", "items": { "type": "string" } },
+        "counterpoint": { "type": "string" },
+        "not_established": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "action": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["owner", "next_step"],
+      "properties": {
+        "owner": { "type": "string", "minLength": 1 },
+        "next_step": { "type": "string", "minLength": 1 },
+        "decision_horizon": { "type": "string" },
+        "release_gate": { "type": "string" }
+      }
+    },
+    "trace": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["receipt_manifest"],
+      "properties": {
+        "receipt_manifest": { "type": "string", "minLength": 1 },
+        "source_locations": { "type": "array", "items": { "type": "string" } },
+        "related_podtics": { "type": "array", "items": { "type": "string" } },
+        "related_issues": { "type": "array", "items": { "type": "string" } },
+        "related_commits": { "type": "array", "items": { "type": "string" } }
+      }
+    }
+  }
+}

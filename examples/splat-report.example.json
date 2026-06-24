@@ -1,0 +1,60 @@
+{
+  "artifact_id": "SYM-INT-DECK-2026-01",
+  "artifact_type": "splat_report",
+  "title": "Symonic Deck publishing rail",
+  "handling": "INTERNAL",
+  "status": "review-ready",
+  "owner": "Jacob Walker",
+  "version": "v0.1",
+  "created_at": "2026-06-24T06:00:00Z",
+  "updated_at": "2026-06-24T06:00:00Z",
+  "splat_mode": "orthogonal",
+  "claim_tier": "plausible",
+  "recipient": "Symonic internal staging",
+  "decision_horizon": "Before the next private packet release",
+  "receipt_manifest": "tools/README.md",
+  "next_action": "Run the workflow and inspect the generated guide artifact.",
+  "signal": "The design guide, reporting template, schema, and renderer are now in one launcher repository.",
+  "proof": [
+    {
+      "statement": "The launcher contains an editable ReportLab guide generator.",
+      "receipt": "tools/create_symonic_design_guide.py",
+      "method": "Repository source inspection",
+      "verified": true
+    },
+    {
+      "statement": "SPLAT reporting has a Markdown scaffold and a Draft 2020-12 schema.",
+      "receipt": "templates/splat-report.md; schemas/splat-report-0.1.schema.json",
+      "method": "Repository source inspection",
+      "verified": true
+    }
+  ],
+  "limit": {
+    "known_limits": [
+      "The guide renderer is a documentation generator, not a claim-verification engine.",
+      "Purple and pale yellow do not encode evidence status."
+    ],
+    "counterpoint": "A structured report can still be wrong if its cited receipts are weak or misinterpreted.",
+    "not_established": [
+      "This does not establish that every future report should use the same perspective mode.",
+      "This does not validate the factual content of a report."
+    ]
+  },
+  "action": {
+    "owner": "Jacob Walker",
+    "next_step": "Review the draft PR and let GitHub Actions render the design guide artifact.",
+    "decision_horizon": "Before private packet production begins",
+    "release_gate": "Confirm generator output, template metadata, and receipt paths are usable on the local machine."
+  },
+  "trace": {
+    "receipt_manifest": "tools/README.md",
+    "source_locations": [
+      "tools/create_symonic_design_guide.py",
+      "templates/splat-report.md",
+      "schemas/splat-report-0.1.schema.json"
+    ],
+    "related_podtics": ["SPLAT-reporting-design-system"],
+    "related_issues": ["#3"],
+    "related_commits": []
+  }
+}
