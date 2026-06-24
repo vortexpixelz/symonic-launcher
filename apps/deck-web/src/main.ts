@@ -105,12 +105,12 @@ mount.innerHTML = `
         <form id="run-form">
           <label for="pattern">Pattern</label>
           <div class="input-row">
-            <input id="pattern" name="pattern" value="012" autocomplete="off" spellcheck="false" />
+            <input id="pattern" name="pattern" value="01" autocomplete="off" spellcheck="false" />
             <button type="submit">Run</button>
           </div>
           <div class="sample-row" aria-label="Sample patterns">
-            <button type="button" data-sample="012">valid: 012</button>
-            <button type="button" data-sample="222">overflow: 222</button>
+            <button type="button" data-sample="01">valid: 01</button>
+            <button type="button" data-sample="22">overflow: 22</button>
           </div>
         </form>
       </section>
