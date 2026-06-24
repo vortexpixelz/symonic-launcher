@@ -40,11 +40,22 @@ python /home/oai/skills/pdfs/scripts/render_pdf.py \
 
 Inspect at least the cover, one table page, and the title-page template before sharing a newly generated PDF.
 
+### Validate a structured report
+
+```bash
+uv run --with jsonschema python tools/validate_splat_report.py \
+  examples/splat-report.example.json
+```
+
+Use the same validator in a local pre-commit hook or a repository workflow once real JSON SPLAT artifacts begin landing.
+
 ## Related artifacts
 
 - `templates/splat-report.md` - human-facing report scaffold with YAML metadata.
 - `schemas/splat-report-0.1.schema.json` - JSON Schema Draft 2020-12 contract for structured SPLAT reports.
-- `.github/workflows/render-splat-guide.yml` - renders the guide as a GitHub Actions artifact whenever this toolchain changes.
+- `examples/splat-report.example.json` - valid reference payload for the contract.
+- `tools/validate_splat_report.py` - no-nonsense schema validator.
+- `.github/workflows/render-splat-guide.yml` - validates the example and renders the guide as a GitHub Actions artifact whenever this toolchain changes.
 
 ## Operating boundary
 
