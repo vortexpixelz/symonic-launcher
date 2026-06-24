@@ -1,0 +1,69 @@
+name: Podtic SQL scaffold check
+
+on:
+  push:
+    paths:
+      - 'supabase/migrations/**'
+      - 'scripts/**/*.sql'
+      - 'src/podtics/**/*.sql'
+      - '.github/workflows/podtic-sql-check.yml'
+  pull_request:
+    paths:
+      - 'supabase/migrations/**'
+      - 'scripts/**/*.sql'
+      - 'src/podtics/**/*.sql'
+      - '.github/workflows/podtic-sql-check.yml'
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: pgvector/pgvector:pg16
+        env:
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_USER: postgres
+          POSTGRES_DB: podtic_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    env:
+      PGPASSWORD: postgres
+      DATABASE_URL: postgresql://postgres:postgres@localhost:5432/podtic_test
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install psql
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y postgresql-client
+
+      - name: Prepare Supabase-compatible extensions schema
+        run: |
+          psql "$DATABASE_URL" -c "create schema if not exists extensions;"
+
+      - name: Apply migrations
+        run: |
+          psql "$DATABASE_URL" -f supabase/migrations/0001_podtic_core.sql
+          psql "$DATABASE_URL" -f supabase/migrations/0002_podtic_revision_functions.sql
+
+      - name: Run seed
+        run: |
+          psql "$DATABASE_URL" -f scripts/seed-podtic-core.sql
+
+      - name: Verify one current revision per section
+        run: |
+          psql "$DATABASE_URL" -c "select section_id, count(*) from podtic_section_revisions where is_current = true group by section_id having count(*) > 1;" | tee /tmp/current_check.txt
+          ! grep -q "(1 row)" /tmp/current_check.txt
+
+      - name: Verify release manifest exists
+        run: |
+          psql "$DATABASE_URL" -c "select release_version from podtic_releases where release_version = 'v0.1.0';"
