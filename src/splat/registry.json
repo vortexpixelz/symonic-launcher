@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schema_version": "0.1.0",
+  "modules": [
+    {
+      "id": "splat.carry-cascade",
+      "name": "SPLAT — Carry Cascade",
+      "kind": "webview",
+      "status": "experimental",
+      "entrypoint": "src/splat/carry-cascade/index.html",
+      "documentation": "src/splat/carry-cascade/README.md",
+      "output": {
+        "format": "png",
+        "aspect_ratio": "4:5",
+        "logical_canvas": {
+          "width": 1280,
+          "height": 1600,
+          "pixel_density": 2
+        }
+      },
+      "capabilities": [
+        "seeded-generation",
+        "edition-palettes",
+        "cover-furniture",
+        "png-export"
+      ],
+      "semantic_boundary": {
+        "plane": "edition",
+        "forbidden_semantic_palettes": ["blue", "green", "red"],
+        "rule": "Evidence semantics must render in a separate rail."
+      }
+    }
+  ]
+}
