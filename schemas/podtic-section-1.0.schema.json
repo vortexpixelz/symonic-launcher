@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://symonic.dev/schemas/podtic-section-1.0.schema.json",
+  "title": "Podtic Section Revision",
+  "type": "object",
+  "required": ["stable_key", "section_type", "title", "content_md", "citations"],
+  "additionalProperties": false,
+  "properties": {
+    "stable_key": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[a-z0-9][a-z0-9:_-]*$"
+    },
+    "section_type": {
+      "type": "string",
+      "enum": ["core_explanation", "mechanism", "variant", "subject", "comparison", "synthesis", "source_note"]
+    },
+    "title": { "type": "string", "minLength": 1 },
+    "content_md": { "type": "string", "minLength": 1 },
+    "content_json": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "citations": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/citationRef" }
+    },
+    "change_summary": { "type": "string" }
+  },
+  "$defs": {
+    "citationRef": {
+      "type": "object",
+      "required": ["source_id"],
+      "additionalProperties": false,
+      "properties": {
+        "source_id": { "type": "string", "format": "uuid" },
+        "locator": { "type": "string" },
+        "quote": { "type": "string" }
+      }
+    }
+  }
+}
