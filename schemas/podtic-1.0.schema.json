@@ -1,0 +1,153 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://symonic.dev/schemas/podtic-1.0.schema.json",
+  "title": "Podtic",
+  "type": "object",
+  "required": ["title", "podtic_type", "core_explanation", "synthesis"],
+  "additionalProperties": false,
+  "properties": {
+    "title": { "type": "string", "minLength": 1 },
+    "podtic_type": {
+      "type": "string",
+      "enum": ["concept", "comparison", "process", "case_study"]
+    },
+    "abstract": { "type": "string" },
+    "domain": { "type": "string" },
+    "tags": {
+      "type": "array",
+      "items": { "type": "string" },
+      "uniqueItems": true
+    },
+    "core_explanation": {
+      "type": "object",
+      "required": ["text", "citations"],
+      "additionalProperties": false,
+      "properties": {
+        "text": { "type": "string", "minLength": 1 },
+        "citations": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/citationRef" }
+        }
+      }
+    },
+    "subjects": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/subject" }
+    },
+    "mechanisms": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/mechanism" }
+    },
+    "process_variants": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/variant" }
+    },
+    "comparison_axis": { "type": "string" },
+    "synthesis": {
+      "type": "object",
+      "required": ["insight", "implications", "citations"],
+      "additionalProperties": false,
+      "properties": {
+        "insight": { "type": "string" },
+        "implications": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "citations": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/citationRef" }
+        }
+      }
+    },
+    "related_podtics": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/relatedPodtic" }
+    }
+  },
+  "$defs": {
+    "citationRef": {
+      "type": "object",
+      "required": ["source_id"],
+      "additionalProperties": false,
+      "properties": {
+        "source_id": { "type": "string", "format": "uuid" },
+        "locator": { "type": "string" },
+        "quote": { "type": "string" }
+      }
+    },
+    "subject": {
+      "type": "object",
+      "required": ["name", "role", "description"],
+      "additionalProperties": false,
+      "properties": {
+        "name": { "type": "string" },
+        "role": { "type": "string" },
+        "description": { "type": "string" },
+        "citations": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/citationRef" }
+        }
+      }
+    },
+    "mechanism": {
+      "type": "object",
+      "required": ["name", "description", "effects", "citations"],
+      "additionalProperties": false,
+      "properties": {
+        "name": { "type": "string" },
+        "description": { "type": "string" },
+        "effects": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "control_variables": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["variable", "effect"],
+            "additionalProperties": false,
+            "properties": {
+              "variable": { "type": "string" },
+              "effect": { "type": "string" }
+            }
+          }
+        },
+        "citations": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/citationRef" }
+        }
+      }
+    },
+    "variant": {
+      "type": "object",
+      "required": ["name", "properties", "citations"],
+      "additionalProperties": false,
+      "properties": {
+        "name": { "type": "string" },
+        "properties": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "impact": { "type": "string" },
+        "tradeoffs": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "citations": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/citationRef" }
+        }
+      }
+    },
+    "relatedPodtic": {
+      "type": "object",
+      "required": ["id", "relation"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string", "format": "uuid" },
+        "relation": { "type": "string" },
+        "weight": { "type": "number", "minimum": 0, "maximum": 1 }
+      }
+    }
+  }
+}
