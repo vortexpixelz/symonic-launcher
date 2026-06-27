@@ -38,6 +38,15 @@ apps/deck-api/README.md
 tools/README.md
 ```
 
+### Research-intake reports
+
+SPLAT reports can also hold bounded importance assessments for source documents without promoting their hypotheses into product or research claims.
+
+```txt
+reports/SYM-PUB-NEON-PERTURBATION-SHARD-001.md
+reports/SYM-PUB-NEON-PERTURBATION-SHARD-001.json
+```
+
 ## File map
 
 ```txt
@@ -55,6 +64,8 @@ tools/create_symonic_design_guide.py
 tools/validate_splat_report.py
 templates/splat-report.md
 examples/splat-report.example.json
+reports/SYM-PUB-NEON-PERTURBATION-SHARD-001.md
+reports/SYM-PUB-NEON-PERTURBATION-SHARD-001.json
 ```
 
 ## First loop
