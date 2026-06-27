@@ -1,0 +1,73 @@
+{
+  "artifact_id": "SYM-PUB-NEON-PERTURBATION-SHARD-001",
+  "artifact_type": "splat_report",
+  "title": "Neon–Perturbation–Shard: Importance Assessment",
+  "handling": "PUBLIC",
+  "status": "review-ready",
+  "owner": "Jacob Walker",
+  "version": "v0.1",
+  "created_at": "2026-06-27T23:58:43Z",
+  "updated_at": "2026-06-27T23:58:43Z",
+  "splat_mode": "orthogonal",
+  "claim_tier": "plausible",
+  "recipient": "Symonic Launcher research-intake rail",
+  "decision_horizon": "Before any public MCORE-1, AI-interpretability, or distributed-systems claim derived from this source",
+  "receipt_manifest": "External source retained outside this public repository; see the paired Markdown report Trace section.",
+  "next_action": "Implement PSA-001 as the first falsifiable perturbation × shard experiment.",
+  "signal": "The source is a high-leverage research-intake artifact because it surfaces a testable MCORE-1 question about controlled perturbations, shard boundaries, and explicit boundary-state handoff. It is not evidence for an MCORE-1, AI-safety, or neon-physics claim.",
+  "proof": [
+    {
+      "statement": "The source describes perturbation theory as a framework for controlled deviations and sharding as a pattern for partitioned computation.",
+      "receipt": "Neon • Perturbation Theory • Database Sharding — Meta-Analysis Report, June 2026, executive summary and Sections 3–4.",
+      "method": "Source review and claim-tier audit.",
+      "verified": true
+    },
+    {
+      "statement": "The strongest transferable idea is the Perturbation × Shard dyad: assess local perturbations, boundary-state transfer, and recomposition behavior in a deterministic state system.",
+      "receipt": "Source report, Section 4.1, Perturbation ↔ Shard.",
+      "method": "Translation into the PSA-001 hypothesis.",
+      "verified": false
+    },
+    {
+      "statement": "The source acknowledges sparse direct cross-literature and proposes sharded perturbation simulation as future work.",
+      "receipt": "Source report, Sections 4.2–4.3 and conclusion.",
+      "method": "Direct scope and limitation review.",
+      "verified": true
+    }
+  ],
+  "limit": {
+    "known_limits": [
+      "The source does not provide a reproducible corpus method, screening criteria, or claim-to-paper map.",
+      "It does not present an MCORE-1 experiment, baseline comparison, or shard-recomposition result.",
+      "It spans multiple disciplines without demonstrating a direct bridge among them.",
+      "The original source file is retained outside this public repository."
+    ],
+    "counterpoint": "A broad conceptual synthesis can create useful hypotheses, but it becomes evidence only after a bounded, reproducible assay produces results.",
+    "not_established": [
+      "MCORE-1 partition invariance.",
+      "Incremental value of MCORE metrics beyond Hamming distance, edit distance, hashes, or conventional integrity schemes.",
+      "Relevance to AI reasoning, AI safety, or neon physics.",
+      "A general scalability or distributed-systems advantage."
+    ]
+  },
+  "action": {
+    "owner": "Jacob Walker",
+    "next_step": "Create PSA-001 in the MCORE-1 research queue and execute the 128-trit, every-boundary, single-trit-flip first milestone.",
+    "decision_horizon": "Before external narrative use.",
+    "release_gate": "Publish a bounded claim only after reproducible zero-perturbation shard invariance, boundary manifests, prespecified baselines, and retained null results."
+  },
+  "trace": {
+    "receipt_manifest": "External source: Neon_Perturbation_Shard_MetaAnalysis_Report(1).docx; June 2026; reviewed as a 6-page meta-analysis. Original intentionally not copied into this public repository.",
+    "source_locations": [
+      "External source document: executive summary; Sections 3–5; references.",
+      "Paired human-readable report: reports/SYM-PUB-NEON-PERTURBATION-SHARD-001.md"
+    ],
+    "related_podtics": [],
+    "related_issues": [
+      "PSA-001 to be created in the MCORE-1 research queue"
+    ],
+    "related_commits": [
+      "82a7598e9ad939e70517763f8bbbc8ce9b962754"
+    ]
+  }
+}
